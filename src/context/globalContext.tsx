@@ -1,6 +1,10 @@
-import { createContext, useState} from "react";
+import { ReactNode, createContext, useState} from "react";
 import { useTipJobReducer } from "../reducers";
 import { Offer, Province, TipJob } from "../models";
+
+type globalContextType = {
+    children?: ReactNode;
+}
 
 type GlobalContextType = {
     cities: Province[];
@@ -14,7 +18,7 @@ type GlobalContextType = {
 
 export const GlobalContext = createContext<GlobalContextType>({} as GlobalContextType);
 
-export function GlobalContextProvider({ children }) {
+export function GlobalContextProvider({ children }: globalContextType) {
 
     const {state, addNewTipJob, modifyTipJob} = useTipJobReducer();
     const [offers, setOffers] = useState<Offer[]>([]);

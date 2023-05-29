@@ -16,7 +16,6 @@ import {
     fetchPostTipJobChatGPT 
 } from "../api";
 import { GlobalContext } from "../context";
-import toast from "react-hot-toast";
 
 const getTipJobList = (tipsJob: TipJob[], offerId: string) => 
     tipsJob?.find(({descriptionOffer}) => 

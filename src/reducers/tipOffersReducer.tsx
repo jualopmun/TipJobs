@@ -16,8 +16,8 @@ export const TIP_OFFER_ACTION_TYPES = {
         return newTipJob;
     },
     [TIP_OFFER_ACTION_TYPES.MODIFY_TIP_OFFER]: (state: TipJob[], action: {payload: TipJob}) => {
-        const { id } = action.payload;
-        const getTipJobInList = state.findIndex((tipJob) => tipJob.id === id);
+        const { descriptionOffer } = action.payload;
+        const getTipJobInList = state.findIndex((tipJob) => tipJob.descriptionOffer.id === descriptionOffer.id);
 
         if(getTipJobInList >= 0) {
           const addNewTipJob = [
