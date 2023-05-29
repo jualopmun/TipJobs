@@ -2,8 +2,13 @@ import transformDate from "../../util/tranformDate.util";
 import logoCompanyUnknow from '../../assets/images/unknow-logo-conmpany.png';
 import { Link } from "react-router-dom";
 import { OfferComponentType } from "./offerComponentType";
+import { useContext } from "react";
+import { GlobalContext } from "../../context";
 
 export function OfferComponent({offer}: OfferComponentType) {
+
+    const {i18n} = useContext(GlobalContext);
+
     const {
         id,
         author,
@@ -17,6 +22,7 @@ export function OfferComponent({offer}: OfferComponentType) {
         salaryPeriod
     } = offer;
     
+    
     const transformDatePublished = transformDate(new Date(published));
 
     const logoCompany = author?.logoUrl ? author.logoUrl : logoCompanyUnknow;
@@ -26,7 +32,7 @@ export function OfferComponent({offer}: OfferComponentType) {
             {salaryMin.value} - {salaryMax.value} {salaryPeriod.value}
         </p> :
         <p className="text-sm text-gray-500">
-            Salario no disponible
+            {i18n.offer.salaryNotAvalible}
         </p>;
 
     return (

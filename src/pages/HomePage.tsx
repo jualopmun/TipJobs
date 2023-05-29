@@ -1,13 +1,16 @@
+import { useContext } from "react";
 import ListOffersComponent from "../components/ListOffers/ListOffers";
 import SearchOffersComponent from "../components/SearchOffers/SearchOffers";
+import { GlobalContext } from "../context";
 
 export function HomePage() {
+  const {i18n} = useContext(GlobalContext);
     return (
         <>
             <div className="m-2">
               <h1 className="tracking-wide text-primary text-2xl font-semibold">TIPJOBS</h1>
               <h5 className="tracking-wide text-accent text-xl font-semibold">
-                Consejos para tu nuevo puesto de trabajo
+                {i18n.constant.subtitle}
               </h5>
             </div>
           <header>

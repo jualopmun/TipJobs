@@ -1,11 +1,12 @@
 import { useTipJob } from "../../hooks";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { HeaderContentOfferComponent } from "../HeaderContentOffer/HeaderContentOffer";
 import { BUTTONSACTIONENUM } from "./buttonsActionEnum";
 import { infoOfferType } from "./infoCardListType";
 import { TipJobChatGPTComponent } from "./TipJobChatGPT";
 import { DescriptionCardOfferComponent } from "./DescriptionCardOffer";
 import { ListVideoCardComponent } from "../VideoOffer/ListVideoCard";
+import { GlobalContext } from "../../context";
 
 export default function InfoCardListOfferComponent({offerId}: infoOfferType) {
    const {
@@ -16,34 +17,38 @@ export default function InfoCardListOfferComponent({offerId}: infoOfferType) {
         loadingVideos
     } = useTipJob(offerId);
 
-   const [actionButton, setActionButton] = useState(BUTTONSACTIONENUM.DESCRIPTION);
+    const {i18n} = useContext(GlobalContext);
+
+    const getButtonsRender = BUTTONSACTIONENUM(i18n);
+
+    const [actionButton, setActionButton] = useState(getButtonsRender.DESCRIPTION);
 
 
     const actionsFunctionButtons = {
-        [BUTTONSACTIONENUM.DESCRIPTION]: () => {setActionButton(BUTTONSACTIONENUM.DESCRIPTION)},
-        [BUTTONSACTIONENUM.TIPJOBCHAT]: () => {
-            setActionButton(BUTTONSACTIONENUM.TIPJOBCHAT);
+        [getButtonsRender.DESCRIPTION]: () => {setActionButton(getButtonsRender.DESCRIPTION)},
+        [getButtonsRender.TIPJOBCHAT]: () => {
+            setActionButton(getButtonsRender.TIPJOBCHAT);
             getTipChatGPT();
         },
-        [BUTTONSACTIONENUM.VIDEOS]: () => {
-            setActionButton(BUTTONSACTIONENUM.VIDEOS);
+        [getButtonsRender.VIDEOS]: () => {
+            setActionButton(getButtonsRender.VIDEOS);
             getVideosCourse();
         },
         
     }
 
     const componentDetailRender = {
-        [BUTTONSACTIONENUM.DESCRIPTION]: tipJob && <DescriptionCardOfferComponent tipJob={tipJob}/>,
-        [BUTTONSACTIONENUM.TIPJOBCHAT]: tipJob && <TipJobChatGPTComponent tipJob={tipJob} 
+        [getButtonsRender.DESCRIPTION]: tipJob && <DescriptionCardOfferComponent tipJob={tipJob}/>,
+        [getButtonsRender.TIPJOBCHAT]: tipJob && <TipJobChatGPTComponent tipJob={tipJob} 
             loadingChatGPT={loadingChatGPT}/>,
-        [BUTTONSACTIONENUM.VIDEOS]: tipJob && <ListVideoCardComponent tipJob={tipJob} 
+        [getButtonsRender.VIDEOS]: tipJob && <ListVideoCardComponent tipJob={tipJob} 
         loadingVideos={loadingVideos}/>,
         
     }
     
     const renderDetailInfo = componentDetailRender[actionButton];
 
-   const renderButtons = Object.values(BUTTONSACTIONENUM).map((button) => (
+    const renderButtons = Object.values(getButtonsRender).map((button) => (
         <button
             key={button}
             className="bg-primary hover:bg-blue-500 focus:bg-blue-500

@@ -1,8 +1,11 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { useListCities } from "../../hooks";
 import { useSearchJobs } from "../../hooks/useSearchJobsHook";
+import { GlobalContext } from "../../context";
 
 export default function SearchOffersComponent() {
+
+    const {i18n} = useContext(GlobalContext);
 
     const {setSearch} = useSearchJobs();
     const {cities} = useListCities();
@@ -34,7 +37,7 @@ export default function SearchOffersComponent() {
                     <label className="block uppercase tracking-wide 
                         text-white text-lg font-semibold mb-2"
                     >
-                        Busco ofertas de...
+                        {i18n.searchOffers.labelInputSearch}
                     </label>
                     <input 
                         className="appearance-none block w-full bg-gray-200 text-gray-700 border 
@@ -49,7 +52,7 @@ export default function SearchOffersComponent() {
                 <div className="w-full px-3 md:w-1/3">
                     
                     <label className="block uppercase tracking-wide text-white text-lg font-semibold mb-2">
-                        En...
+                        {i18n.searchOffers.labelSelectSearch}
                     </label>
                     <select className="block appearance-none w-full bg-gray-200 border border-gray-200 
                         text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white 
@@ -65,7 +68,7 @@ export default function SearchOffersComponent() {
                         type="submit" 
                         className="bg-accent text-white text-lg font-semibold py-3 px-4 pr-8"
                     >
-                        Buscar
+                         {i18n.searchOffers.buttonSearch}
                     </button>
                 </div>
             </div>

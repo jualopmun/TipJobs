@@ -1,12 +1,15 @@
 import { ReactNode, createContext, useState} from "react";
 import { useTipJobReducer } from "../reducers";
 import { Offer, Province, TipJob } from "../models";
+import { i18nConfig } from "../config";
+import { i18Model } from "../models/i18nModel";
 
 type globalContextType = {
     children?: ReactNode;
 }
 
 type GlobalContextType = {
+    i18n: i18Model,
     cities: Province[];
     setCities: React.Dispatch<React.SetStateAction<Province[]>>;
     offers: Offer[];
@@ -20,6 +23,7 @@ export const GlobalContext = createContext<GlobalContextType>({} as GlobalContex
 
 export function GlobalContextProvider({ children }: globalContextType) {
 
+    const [i18n] = useState(i18nConfig.es)
     const {state, addNewTipJob, modifyTipJob} = useTipJobReducer();
     const [offers, setOffers] = useState<Offer[]>([]);
     const [cities, setCities] = useState<Province[]>([]);
@@ -27,6 +31,7 @@ export function GlobalContextProvider({ children }: globalContextType) {
 
     return (
         <GlobalContext.Provider value={{
+            i18n,
             cities,
             setCities,
             offers,

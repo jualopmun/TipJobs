@@ -1,21 +1,22 @@
 import { TipJob } from "../../models";
 import { tipJobType } from "./infoCardListType";
+import { GlobalContext } from "../../context";
+import { i18Model } from "../../models/i18nModel";
+import { useContext } from "react";
 
-const NOTREQUIRED = 'No requerida';
-
-const REQUIREMENTSPROPS = [
+const REQUIREMENTSPROPS = ( i18n: i18Model) => ([
     {
-        title: 'Estudios mínimos', 
+        title:  i18n.infoCardOffer.requirementsOffer.studiesMin, 
         description: (tipJob: TipJob) => 
-        tipJob?.descriptionOffer?.studiesMin?.value ?? NOTREQUIRED
+        tipJob?.descriptionOffer?.studiesMin?.value ?? i18n.constant.notRequired
     },
     {
-        title: 'Experiencia Mínima', 
+        title:  i18n.infoCardOffer.requirementsOffer.experienceMin, 
         description: (tipJob: TipJob) => 
-        tipJob?.descriptionOffer?.experienceMin?.value ?? NOTREQUIRED
+        tipJob?.descriptionOffer?.experienceMin?.value ?? i18n.constant.notRequired
     },
     {
-        title: 'Idiomas requeridos', 
+        title:  i18n.infoCardOffer.requirementsOffer.languages, 
         component: (tipJob: TipJob) => tipJob?.descriptionOffer?.languages.length > 0 ? 
 
         tipJob.descriptionOffer?.languages.map(({name, level}) => (
@@ -25,10 +26,10 @@ const REQUIREMENTSPROPS = [
             >
                 {name} - {level}
             </p>
-        )) : <p className="text-gray-700 whitespace-pre-line mb-2">{NOTREQUIRED}</p>
+        )) : <p className="text-gray-700 whitespace-pre-line mb-2">{ i18n.constant.notRequired}</p>
     },
     {
-        title: 'Conocimientos necesarios', 
+        title:  i18n.infoCardOffer.requirementsOffer.skillList, 
         component: (tipJob: TipJob) => tipJob?.descriptionOffer?.skillsList.length > 0 ?
         tipJob?.descriptionOffer?.skillsList?.map(({skill}) => (
             <div 
@@ -39,17 +40,22 @@ const REQUIREMENTSPROPS = [
             > 
                 {skill} 
             </div>
-        )) : <p className="text-gray-700 whitespace-pre-line mb-2">{NOTREQUIRED}</p>
+        )) : <p className="text-gray-700 whitespace-pre-line mb-2">
+                { i18n.constant.notRequired}
+            </p>
     },
     {
-        title: 'Requisitos mínimos', 
+        title:  i18n.infoCardOffer.requirementsOffer.minRequirements, 
         description: (tipJob: TipJob) => 
-        tipJob?.descriptionOffer?.minRequirements !== '' ? tipJob?.descriptionOffer?.minRequirements  : NOTREQUIRED
+        tipJob?.descriptionOffer?.minRequirements !== '' ? 
+            tipJob?.descriptionOffer?.minRequirements  :  i18n.constant.notRequired
     },
-];
+]);
 
 export function RequirementsOfferComponent({tipJob}: tipJobType) {
-    const renderRequirements = REQUIREMENTSPROPS.map((requirement) => (
+    const { i18n } = useContext(GlobalContext);
+    
+    const renderRequirements = REQUIREMENTSPROPS(i18n).map((requirement) => (
         <div key={requirement.title}>
             <p className="text-lg font-bold mb-2 text-gray-800">{requirement.title}</p>
             {tipJob && requirement?.description && 

@@ -2,9 +2,12 @@ import { memo, useContext } from "react"
 import { GlobalContext } from "../../context";
 import { CardContentComponent } from "../CardContent/CardContent";
 import { OfferComponent } from "./Offer";
+import { useSearchJobs } from "../../hooks";
 
 export const ListOffersComponent = memo(function ListOffersComponent() {
-    const {offers} = useContext(GlobalContext);
+    const {offers, i18n} = useContext(GlobalContext);
+
+    const {loadingOffers} = useSearchJobs();
 
     const renderListOffers = offers.map((offer) => (
         <OfferComponent key={offer.id} offer={offer}/>
@@ -12,9 +15,9 @@ export const ListOffersComponent = memo(function ListOffersComponent() {
     return (
         <>
         {
-          renderListOffers.length === 0 && 
+          renderListOffers.length === 0 && !loadingOffers &&
             <CardContentComponent 
-              title='No hay resultados disponibles' 
+              title={i18n.constant.notResultAvalible}
             />
         }
           <div className="rounded-lg shadow-lg">          

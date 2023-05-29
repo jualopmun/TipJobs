@@ -16,6 +16,7 @@ import {
     fetchPostTipJobChatGPT 
 } from "../api";
 import { GlobalContext } from "../context";
+import toast from "react-hot-toast";
 
 const getTipJobList = (tipsJob: TipJob[], offerId: string) => 
     tipsJob?.find(({descriptionOffer}) => 
@@ -32,8 +33,6 @@ export function useTipJob(offerId: string) {
     const [tipJob, setTipJob] = useState<TipJob>();
     const [loadingChatGPT, setLoadingChatGPT] = useState(false);
     const [loadingVideos, setLoadingVideos] = useState(false);
-    const [error, setError] = useState('');
-
     useEffect(() => {
 
         const searchGeTipJobState = getTipJobList(tipsJob, offerId)
@@ -47,6 +46,10 @@ export function useTipJob(offerId: string) {
                 };
                 addNewTipJob(newTipJob);
                 setTipJob(newTipJob);
+            })
+            .catch((error) => {
+                console.error(`Se ha producido un error en visualizar los datos: ${error}`);
+                toast.error('Se ha producido un error en visualizar los datos');
             });
         }
     }, []);
@@ -82,9 +85,9 @@ export function useTipJob(offerId: string) {
                 modifyTipJob(tipJobForModify);
                 setTipJob(tipJobForModify);
             }
-        } catch (e) {
-          console.error(e);
-          setError((e as Error).message);
+        } catch (error) {
+          console.error(`Se ha producido un error en cargar los cursos: ${error}`);
+          toast.error('Se ha producido un error en cargar los cursos');
         } finally {
           setLoadingVideos(false)
         }
@@ -113,9 +116,9 @@ export function useTipJob(offerId: string) {
                 modifyTipJob(tipJobForModify);
                 setTipJob(tipJobForModify);
             }
-        } catch (e) {
-          console.error(e);
-          setError((e as Error).message);
+        } catch (error) {
+          console.error(`Se ha producido un error en cargar los consejos: ${error}`);
+          toast.error('Se ha producido un error en cargar los consejos');
         } finally {
           setLoadingChatGPT(false)
         }
@@ -127,6 +130,5 @@ export function useTipJob(offerId: string) {
         getTipChatGPT,
         loadingChatGPT,
         loadingVideos,
-        error
     }
 }

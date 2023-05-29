@@ -1,7 +1,10 @@
-import { NOTAVALIBLE, NOTREQUIRED } from "./constantHeader";
+import { useContext } from "react";
 import { HeaderContentOfferType } from "./headerContentType";
+import { GlobalContext } from "../../context";
 
 export function ListDescriptionOfferComponent({descriptionOffer}: HeaderContentOfferType) {
+
+    const {i18n} = useContext(GlobalContext);
 
     const {
         city,
@@ -17,9 +20,9 @@ export function ListDescriptionOfferComponent({descriptionOffer}: HeaderContentO
         [
             `${city}, ${province.value}, ${country.value}`,
             teleworking?.value,
-            `Salario: ${salaryDescription ?? NOTAVALIBLE}`,
-            `Experiencia mínima: ${minRequirements !== '' ? minRequirements : NOTREQUIRED}`,
-            `Tipo de contrato: ${contractType.value ?? NOTAVALIBLE}`
+            `Salario: ${salaryDescription ?? i18n.constant.notAvalible}`,
+            `Experiencia mínima: ${minRequirements !== '' ? minRequirements : i18n.constant.notRequired}`,
+            `Tipo de contrato: ${contractType.value ?? i18n.constant.notAvalible}`
         ].map((description, index) => (
        <div key={`description-${index}`}>
         {description && 
