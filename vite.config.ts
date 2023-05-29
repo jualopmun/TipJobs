@@ -9,6 +9,8 @@ export default defineConfig({
       {
         target: 'https://api.infojobs.net/',
         changeOrigin: true,
+        secure: false,
+        ws: true,
         rewrite: (path) => path.replace(/^\/apijobs/, '')
       },
     }
