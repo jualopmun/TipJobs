@@ -1,2 +1,2 @@
-/apijobs/*  https://api.infojobs.net/ 200
+/apijobs/*  https://api.infojobs.net/:splat 200
 
