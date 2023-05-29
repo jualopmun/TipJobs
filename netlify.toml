@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/apijobs"
-  to = "https://api.infojobs.net"
+  to = "https://api.infojobs.net/"
   status = 200
   force = true
   headers = {X-From = "Netlify"}
