@@ -15,6 +15,7 @@ interface ConstantsModel {
     notResultAvalible: string,
     loading: string,
     select: string,
+    inAllCountry: string,
 }
 
 interface ErrorMessagesModel {

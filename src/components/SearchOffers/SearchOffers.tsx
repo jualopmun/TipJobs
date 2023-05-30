@@ -1,8 +1,7 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { useListCities } from "../../hooks";
 import { useSearchJobs } from "../../hooks/useSearchJobsHook";
 import { GlobalContext } from "../../context";
-import { AutoCompleteInput } from "../AutoCompleteForm/AutoCompleteInput";
 
 export default function SearchOffers() {
 
@@ -11,20 +10,30 @@ export default function SearchOffers() {
     const {setSearch} = useSearchJobs();
     const {cities} = useListCities();
     
-    const [valueCity, setValueCity] = useState('');
     const inputOfferValue = useRef<HTMLInputElement>(null);
+    const selectCityValue = useRef<HTMLSelectElement>(null);
 
     const onSubmitSearch = (event: React.SyntheticEvent) => {
         event.preventDefault();
         const valueInputOfferJob = inputOfferValue?.current?.value ?? null;
-        const valueSelectCityJob = valueCity?? null;
+        const valueSelectCityJob = selectCityValue?.current?.value ?? null;
 
         const sendParams = {
             searchJob: valueInputOfferJob,
             searchCity: valueSelectCityJob
         }
         setSearch(sendParams)
-    }
+    };
+
+    const listOptionsCities = cities.map((city) => {
+        const {key, value} = city;
+        
+        let renderOption = <option key={key} value={key}>{value}</option>
+        if(value.toLowerCase().includes('seleccionar')) {
+            renderOption = <option key={key} value={key}>En toda España</option>;
+        }
+        return (renderOption);
+    })
 
     return ( 
         <form onSubmit={onSubmitSearch}>
@@ -50,7 +59,14 @@ export default function SearchOffers() {
                     <label className="block uppercase tracking-wide text-white text-lg font-semibold mb-2">
                         {i18n.searchOffers.labelSelectSearch}
                     </label>
-                    <AutoCompleteInput listObjects={cities} setData={setValueCity}/>
+                    <select className="block appearance-none w-full bg-gray-200 border border-gray-200 
+                        text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white 
+                        focus:border-gray-500"
+                        ref={selectCityValue}
+                        name="city"
+                    >
+                        {listOptionsCities}
+                    </select>
                 </div>
                 <div className="w-full px-3 md:w-1/3 mt-8">
                     <button 

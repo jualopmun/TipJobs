@@ -8,6 +8,7 @@ const es: i18Model = {
         notResultAvalible: 'No se ha encontrado resultados',
         loading: 'Espere por favor...',
         select: 'Seleccionar',
+        inAllCountry: 'En toda España',
     },
     errorMessages: {
         errorLoadCities:'Se ha producido un error en cargar la lista de ciudades',
