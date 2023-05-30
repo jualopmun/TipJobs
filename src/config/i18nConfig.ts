@@ -27,7 +27,7 @@ const es: i18Model = {
     },
     infoCardOffer: {
         buttonsAction: {
-            description: 'DESCRIPCIÓN',
+            description: 'Descripción',
             tipJobChat: 'Consejo para este puesto',
             videos: 'Cursos relacionados'
         },

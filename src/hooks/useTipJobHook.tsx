@@ -64,11 +64,17 @@ export function useTipJob(offerId: string) {
                 setLoadingVideos(true);
                 const getPromiseVideos = Promise.all(
                         tipJob.descriptionOffer.skillsList.slice(0,3).map(async({skill}) => {
-                        const getVideo = (await fetchApiListVideo(skill));
-                        if(getVideo){
+                        try{
+                            const getVideo = (await fetchApiListVideo(skill));
+                            if (!getVideo?.items) throw 'error';
+
                             const findVideo = getVideo.items?.find(({type}) => type === 'video') as VideoDescription
                             return {...findVideo, skill};
+                            
+                        } catch(error) {
+                            throw `Error load videos: ${error}`;
                         }
+                       
                     })
                 );
                 
