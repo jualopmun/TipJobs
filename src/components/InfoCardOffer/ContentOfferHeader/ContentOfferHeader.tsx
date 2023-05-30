@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import transformDate from "../../util/tranformDate.util";
-import { ListDescriptionOfferComponent } from "./ListDescriptionOffer";
-import { HeaderContentOfferType } from "./headerContentType";
-import { GlobalContext } from "../../context";
+import { GlobalContext } from "../../../context";
+import transformDate from "../../../util/tranformDateUtil";
+import { ListDescriptionOffer } from "../DescriptionOfferCard/ListDescriptionOffer";
+import { ContentOfferHeaderType } from "../infoCardOfferType";
 
-export function HeaderContentOfferComponent({descriptionOffer}: HeaderContentOfferType) {
+export function ContentOfferHeader({descriptionOffer}:  ContentOfferHeaderType) {
     const {
         creationDate,
         profile,
@@ -16,7 +16,7 @@ export function HeaderContentOfferComponent({descriptionOffer}: HeaderContentOff
     
     const transformDatePublished = transformDate(new Date(creationDate));
 
-    const renderListDescriptionOffer = <ListDescriptionOfferComponent descriptionOffer={descriptionOffer}/>;
+    const renderListDescriptionOffer = <ListDescriptionOffer descriptionOffer={descriptionOffer}/>;
 
     return (
         <>                        

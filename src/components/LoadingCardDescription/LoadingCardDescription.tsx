@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { GlobalContext } from "../../context"
 
-export function LoadingCardDescriptionComponent() {
+export function LoadingCardDescription() {
     const {i18n} = useContext(GlobalContext);
     return (
         <>

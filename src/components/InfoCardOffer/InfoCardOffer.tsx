@@ -1,14 +1,14 @@
 import { useTipJob } from "../../hooks";
 import { useContext, useState } from "react";
-import { HeaderContentOfferComponent } from "../HeaderContentOffer/HeaderContentOffer";
-import { BUTTONSACTIONENUM } from "./buttonsActionEnum";
-import { infoOfferType } from "./infoCardListType";
-import { TipJobChatGPTComponent } from "./TipJobChatGPT";
-import { DescriptionCardOfferComponent } from "./DescriptionCardOffer";
-import { ListVideoCardComponent } from "../VideoOffer/ListVideoCard";
+import { BUTTONSACTIONENUM } from "./ContentOfferHeader/buttonsActionEnum";
+import { InfoOfferType } from "./infoCardOfferType";
 import { GlobalContext } from "../../context";
+import { TipJobChatGPT } from "../TipJobChatGPT/TipJobChatGPTType";
+import { ContentOfferHeader } from "./ContentOfferHeader/ContentOfferHeader";
+import { DescriptionOfferCard } from "./DescriptionOfferCard/DescriptionOfferCard";
+import { ListVideoCard } from "../VideoOffer/ListVideoCard";
 
-export default function InfoCardListOfferComponent({offerId}: infoOfferType) {
+export default function InfoCardListOffer({offerId}: InfoOfferType) {
    const {
         tipJob, 
         getVideosCourse, 
@@ -25,7 +25,9 @@ export default function InfoCardListOfferComponent({offerId}: infoOfferType) {
 
 
     const actionsFunctionButtons = {
-        [getButtonsRender.DESCRIPTION]: () => {setActionButton(getButtonsRender.DESCRIPTION)},
+        [getButtonsRender.DESCRIPTION]: () => {
+            setActionButton(getButtonsRender.DESCRIPTION)
+        },
         [getButtonsRender.TIPJOBCHAT]: () => {
             setActionButton(getButtonsRender.TIPJOBCHAT);
             getTipChatGPT();
@@ -38,10 +40,10 @@ export default function InfoCardListOfferComponent({offerId}: infoOfferType) {
     }
 
     const componentDetailRender = {
-        [getButtonsRender.DESCRIPTION]: tipJob && <DescriptionCardOfferComponent tipJob={tipJob}/>,
-        [getButtonsRender.TIPJOBCHAT]: tipJob && <TipJobChatGPTComponent tipJob={tipJob} 
+        [getButtonsRender.DESCRIPTION]: tipJob && <DescriptionOfferCard tipJob={tipJob}/>,
+        [getButtonsRender.TIPJOBCHAT]: tipJob && <TipJobChatGPT tipJob={tipJob} 
             loadingChatGPT={loadingChatGPT}/>,
-        [getButtonsRender.VIDEOS]: tipJob && <ListVideoCardComponent tipJob={tipJob} 
+        [getButtonsRender.VIDEOS]: tipJob && <ListVideoCard tipJob={tipJob} 
         loadingVideos={loadingVideos}/>,
         
     }
@@ -66,7 +68,7 @@ export default function InfoCardListOfferComponent({offerId}: infoOfferType) {
                 tipJob?.descriptionOffer && 
                 <div className="bg-white p-6 rounded-lg shadow-lg mb-5">
                     {renderButtons}
-                    <HeaderContentOfferComponent descriptionOffer={tipJob.descriptionOffer}/>
+                    <ContentOfferHeader descriptionOffer={tipJob.descriptionOffer}/>
                 </div>
             }
             {renderDetailInfo}

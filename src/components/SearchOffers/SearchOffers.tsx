@@ -4,7 +4,7 @@ import { useSearchJobs } from "../../hooks/useSearchJobsHook";
 import { GlobalContext } from "../../context";
 import { AutoCompleteInput } from "../AutoCompleteForm/AutoCompleteInput";
 
-export default function SearchOffersComponent() {
+export default function SearchOffers() {
 
     const {i18n} = useContext(GlobalContext);
 
@@ -50,7 +50,7 @@ export default function SearchOffersComponent() {
                     <label className="block uppercase tracking-wide text-white text-lg font-semibold mb-2">
                         {i18n.searchOffers.labelSelectSearch}
                     </label>
-                    <AutoCompleteInput listObjects={cities} setData={setValueCity}></AutoCompleteInput>
+                    <AutoCompleteInput listObjects={cities} setData={setValueCity}/>
                 </div>
                 <div className="w-full px-3 md:w-1/3 mt-8">
                     <button 

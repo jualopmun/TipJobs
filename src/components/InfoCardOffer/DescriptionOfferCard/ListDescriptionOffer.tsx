@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { HeaderContentOfferType } from "./headerContentType";
-import { GlobalContext } from "../../context";
+import { GlobalContext } from "../../../context";
+import { ContentOfferHeaderType } from "../infoCardOfferType";
 
-export function ListDescriptionOfferComponent({descriptionOffer}: HeaderContentOfferType) {
+export function ListDescriptionOffer({descriptionOffer}: ContentOfferHeaderType) {
 
     const {i18n} = useContext(GlobalContext);
 

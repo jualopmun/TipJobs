@@ -1,8 +1,9 @@
-import { TipJob } from "../../models";
-import { tipJobType } from "./infoCardListType";
-import { GlobalContext } from "../../context";
-import { i18Model } from "../../models/i18nModel";
+
 import { useContext } from "react";
+import { GlobalContext } from "../../../context";
+import { TipJob } from "../../../models";
+import { i18Model } from "../../../models/i18nModel";
+import { TipJobType } from "../infoCardOfferType";
 
 const REQUIREMENTSPROPS = ( i18n: i18Model) => ([
     {
@@ -52,7 +53,7 @@ const REQUIREMENTSPROPS = ( i18n: i18Model) => ([
     },
 ]);
 
-export function RequirementsOfferComponent({tipJob}: tipJobType) {
+export function RequirementsOffer({tipJob}: TipJobType) {
     const { i18n } = useContext(GlobalContext);
     
     const renderRequirements = REQUIREMENTSPROPS(i18n).map((requirement) => (

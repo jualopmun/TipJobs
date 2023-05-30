@@ -1,13 +1,13 @@
-import transformDate from "../../util/tranformDate.util"; 
+import transformDate from "../../util/tranformDateUtil"; 
 import logoCompanyUnknow from '../../assets/images/unknow-logo-conmpany.png';
 import { Link } from "react-router-dom";
 import { OfferComponentType } from "./offerComponentType";
 import { useContext } from "react";
 import { GlobalContext } from "../../context";
 
-export function OfferComponent({offer}: OfferComponentType) {
+export function Offer({offer}: OfferComponentType) {
 
-    const {i18n} = useContext(GlobalContext);
+    const { i18n } = useContext(GlobalContext);
 
     const {
         id,

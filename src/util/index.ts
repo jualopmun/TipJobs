@@ -1,3 +1,3 @@
-export * from './fetchApi.util';
-export * from './fetchGetApiInfoJobs.util';
-export * from './tranformDate.util';
+export * from './fetchApiUtil';
+export * from './fetchGetApiInfoJobsUtil';
+export * from './tranformDateUtil';

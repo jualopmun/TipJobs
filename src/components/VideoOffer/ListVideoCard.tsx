@@ -1,22 +1,22 @@
 import { useContext } from "react";
-import { CardContentComponent } from "../CardContent/CardContent";
-import { LoadingCardDescriptionComponent } from "../LoadingCardDescription/LoadingCardDescription";
+import { CardContent } from "../CardContent/CardContent";
+import { LoadingCardDescription } from "../LoadingCardDescription/LoadingCardDescription";
 import { VideoOffer } from "./VideoOffer";
 import { videoOfferType } from "./videoOfferType";
 import { GlobalContext } from "../../context";
 
-export function ListVideoCardComponent({tipJob: {videoCourses, descriptionOffer}, loadingVideos}: videoOfferType) {
+export function ListVideoCard({tipJob: {videoCourses, descriptionOffer}, loadingVideos}: videoOfferType) {
     const {i18n} = useContext(GlobalContext);
 
     const renderVideos = loadingVideos ? 
-        <LoadingCardDescriptionComponent/> :
+        <LoadingCardDescription/> :
         videoCourses?.items?.map((videoCourse) => (
             <VideoOffer key={videoCourse.id} video={videoCourse}/>
     ));
 
     return (
         <div className="bg-white p-6 rounded-lg shadow-lg">
-            <CardContentComponent 
+            <CardContent 
                 title={i18n.videoOffer.listCourseTitle}
             >
                 {renderVideos}
@@ -26,7 +26,7 @@ export function ListVideoCardComponent({tipJob: {videoCourses, descriptionOffer}
                         {i18n.videoOffer.notFoundList}
                     </p>
                 }
-            </CardContentComponent>
+            </CardContent>
         </div>
     )
 

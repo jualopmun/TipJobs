@@ -1,19 +1,19 @@
 import { memo, useContext } from "react"
 import { GlobalContext } from "../../context";
-import { CardContentComponent } from "../CardContent/CardContent";
-import { OfferComponent } from "./Offer";
+import { CardContent } from "../CardContent/CardContent";
+import { Offer } from "./Offer";
 
-export const ListOffersComponent = memo(function ListOffersComponent() {
+export const ListOffers = memo(function ListOffers() {
     const {offers, i18n, loadingOffers} = useContext(GlobalContext);
 
     const renderListOffers = offers.map((offer) => (
-        <OfferComponent key={offer.id} offer={offer}/>
+        <Offer key={offer.id} offer={offer}/>
     ))
     return (
         <>
         {
           renderListOffers.length === 0 && !loadingOffers &&
-            <CardContentComponent 
+            <CardContent 
               title={i18n.constant.notResultAvalible}
             />
         }
@@ -24,4 +24,4 @@ export const ListOffersComponent = memo(function ListOffersComponent() {
     )
 });
 
-export default ListOffersComponent;
+export default ListOffers;
