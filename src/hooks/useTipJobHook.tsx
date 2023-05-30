@@ -26,7 +26,8 @@ export function useTipJob(offerId: string) {
     const {
         tipsJob,
         addNewTipJob, 
-        modifyTipJob
+        modifyTipJob,
+        i18n,
     } = useContext(GlobalContext);
     
 
@@ -48,8 +49,8 @@ export function useTipJob(offerId: string) {
                 setTipJob(newTipJob);
             })
             .catch((error) => {
-                console.error(`Se ha producido un error en visualizar los datos: ${error}`);
-                toast.error('Se ha producido un error en visualizar los datos');
+                console.error(`Error view data: ${error}`);
+                toast.error(i18n.errorMessages.errorLoadData);
             });
         }
     }, []);
@@ -86,8 +87,8 @@ export function useTipJob(offerId: string) {
                 setTipJob(tipJobForModify);
             }
         } catch (error) {
-          console.error(`Se ha producido un error en cargar los cursos: ${error}`);
-          toast.error('Se ha producido un error en cargar los cursos');
+          console.error(`Error load videos: ${error}`);
+          toast.error(i18n.errorMessages.errorLoadCourses);
         } finally {
           setLoadingVideos(false)
         }
@@ -117,8 +118,8 @@ export function useTipJob(offerId: string) {
                 setTipJob(tipJobForModify);
             }
         } catch (error) {
-          console.error(`Se ha producido un error en cargar los consejos: ${error}`);
-          toast.error('Se ha producido un error en cargar los consejos');
+          console.error(`error load tips: ${error}`);
+          toast.error(i18n.errorMessages.errorLoadTips);
         } finally {
           setLoadingChatGPT(false)
         }

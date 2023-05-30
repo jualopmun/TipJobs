@@ -9,7 +9,8 @@ Con TipJobs será muy fácil conseguir tu nuevo puesto de trabajo. En ella te da
 
 ## Tecnologias
 - Vite
-- React 
+- React
+- Tailwind
 - ApiRapid: 
   - Youtube search results: https://rapidapi.com/marindelija/api/youtube-search-results
   - ChatGPT: https://rapidapi.com/Glavier/api/chatgpt53
@@ -32,3 +33,10 @@ npm install
 # Ejecutar en local
 npm run dev
 ```
+
+## Guia
+  - En la pantalla principal buscamos el trabajo y seleccionamos el deseado
+  - Dentro de la oferta podemos ver tres tipos de informacion:
+    - Descripción de la oferta completa
+    - Consejos de chatGPT para una entrevista del trabajo para esa oferta.
+    - Cursos seleccionados para la oferta. Estara disponible si en la oferta viene los conocimientos

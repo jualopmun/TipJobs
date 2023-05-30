@@ -1,7 +1,8 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { useListCities } from "../../hooks";
 import { useSearchJobs } from "../../hooks/useSearchJobsHook";
 import { GlobalContext } from "../../context";
+import { AutoCompleteInput } from "../AutoCompleteForm/AutoCompleteInput";
 
 export default function SearchOffersComponent() {
 
@@ -9,19 +10,14 @@ export default function SearchOffersComponent() {
 
     const {setSearch} = useSearchJobs();
     const {cities} = useListCities();
-
+    
+    const [valueCity, setValueCity] = useState('');
     const inputOfferValue = useRef<HTMLInputElement>(null);
-    const selectCityValue = useRef<HTMLSelectElement>(null);
-
-    const listOptionsCities = cities.map((city) => {
-        const {key, value} = city;
-        return (<option key={key} value={key}>{value}</option>);
-    })
 
     const onSubmitSearch = (event: React.SyntheticEvent) => {
         event.preventDefault();
         const valueInputOfferJob = inputOfferValue?.current?.value ?? null;
-        const valueSelectCityJob = selectCityValue?.current?.value ?? null;
+        const valueSelectCityJob = valueCity?? null;
 
         const sendParams = {
             searchJob: valueInputOfferJob,
@@ -44,7 +40,7 @@ export default function SearchOffersComponent() {
                         border-gray-200 rounded py-3 px-4 mb-3 leading-tight 
                         focus:outline-none focus:bg-white focus:border-gray-500" 
                         type="text" 
-                        placeholder="Puesto, empresa o palabra en clave"
+                        placeholder={i18n.searchOffers.placeHolderInputSearch}
                         ref={inputOfferValue}
                         name="offer"
                     />
@@ -54,14 +50,7 @@ export default function SearchOffersComponent() {
                     <label className="block uppercase tracking-wide text-white text-lg font-semibold mb-2">
                         {i18n.searchOffers.labelSelectSearch}
                     </label>
-                    <select className="block appearance-none w-full bg-gray-200 border border-gray-200 
-                        text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white 
-                        focus:border-gray-500"
-                        ref={selectCityValue}
-                        name="city"
-                    >
-                        {listOptionsCities}
-                    </select>
+                    <AutoCompleteInput listObjects={cities} setData={setValueCity}></AutoCompleteInput>
                 </div>
                 <div className="w-full px-3 md:w-1/3 mt-8">
                     <button 

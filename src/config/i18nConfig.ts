@@ -5,11 +5,25 @@ const es: i18Model = {
         subtitle: 'Consejos para tu nuevo puesto de trabajo',
         notAvalible: 'No disponible',
         notRequired: 'No Requerida',
-        notResultAvalible: 'No hay resultados disponibles',
+        notResultAvalible: 'No se ha encontrado resultados',
         loading: 'Espere por favor...',
+        select: 'Seleccionar',
     },
+    errorMessages: {
+        errorLoadCities:'Se ha producido un error en cargar la lista de ciudades',
+        errorLoadJobs: 'Se ha producido un error en cargar la lista de trabajo',
+        errorLoadData: 'Se ha producido un error en visualizar los datos',
+        errorLoadCourses: 'Se ha producido un error en cargar los cursos',
+        errorLoadTips: 'Se ha producido un error en cargar los consejos',
+    },
+
     headerContentOffer: {
         buttonOffer: 'INSCRIBIRME EN ESTA OFERTA',
+        lisDescriptionOffer: {
+            salary: 'Salario',
+            experienceMin: 'Experiencia mínima',
+            contractType: 'Tipo de contrato',
+        },
     },
     infoCardOffer: {
         buttonsAction: {
@@ -36,6 +50,7 @@ const es: i18Model = {
         labelInputSearch: 'Busco ofertas de...',
         labelSelectSearch: 'En...',
         buttonSearch: 'Buscar',
+        placeHolderInputSearch: 'Puesto, empresa o palabra en clave',
     },
     videoOffer: {
         listCourseTitle: 'Cursos relacionados',

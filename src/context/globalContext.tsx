@@ -14,6 +14,8 @@ type GlobalContextType = {
     setCities: React.Dispatch<React.SetStateAction<Province[]>>;
     offers: Offer[];
     setOffers: React.Dispatch<React.SetStateAction<Offer[]>>;
+    loadingOffers: boolean;
+    setLoaingOffers: React.Dispatch<React.SetStateAction<boolean>>;
     tipsJob: TipJob[],
     addNewTipJob: (tipJob: TipJob) => void,
     modifyTipJob: (tipJob: TipJob) => void
@@ -27,6 +29,7 @@ export function GlobalContextProvider({ children }: globalContextType) {
     const {state, addNewTipJob, modifyTipJob} = useTipJobReducer();
     const [offers, setOffers] = useState<Offer[]>([]);
     const [cities, setCities] = useState<Province[]>([]);
+    const [loadingOffers, setLoaingOffers] = useState(false);
 
 
     return (
@@ -36,6 +39,8 @@ export function GlobalContextProvider({ children }: globalContextType) {
             setCities,
             offers,
             setOffers,
+            loadingOffers,
+            setLoaingOffers,
             tipsJob: state,
             addNewTipJob,
             modifyTipJob

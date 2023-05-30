@@ -12,17 +12,22 @@ export function ListDescriptionOfferComponent({descriptionOffer}: HeaderContentO
         country,
         teleworking,
         salaryDescription,
-        minRequirements,
+        experienceMin,
         contractType
     } = descriptionOffer;
+
+    const {headerContentOffer: {lisDescriptionOffer}, constant} = i18n;
 
     const listRenderDescription = 
         [
             `${city}, ${province.value}, ${country.value}`,
             teleworking?.value,
-            `Salario: ${salaryDescription ?? i18n.constant.notAvalible}`,
-            `Experiencia mínima: ${minRequirements !== '' ? minRequirements : i18n.constant.notRequired}`,
-            `Tipo de contrato: ${contractType.value ?? i18n.constant.notAvalible}`
+            `${lisDescriptionOffer.salary}: 
+                ${salaryDescription ?? constant.notAvalible}`,
+            `${lisDescriptionOffer.experienceMin}:
+                 ${experienceMin?.value ?? i18n.constant.notRequired}`,
+            `${lisDescriptionOffer.contractType}: 
+                ${contractType.value ?? i18n.constant.notAvalible}`
         ].map((description, index) => (
        <div key={`description-${index}`}>
         {description && 

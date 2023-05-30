@@ -9,29 +9,32 @@ type searchJobTyp = {
 }
 
 export function useSearchJobs() {
-    const { offers, setOffers } = useContext(GlobalContext);
+    const { 
+        offers, 
+        setOffers, 
+        setLoaingOffers, 
+        i18n 
+    } = useContext(GlobalContext);
 
     const [search, setSearch] = useState<searchJobTyp>({searchJob: null, searchCity: null});
 
-    const [loadingOffers, setLoadingOffers ] = useState(false);
 
     useEffect(() => {
         if(offers.length > 0 && !search.searchJob && !search.searchCity) return;
-        setLoadingOffers(true);
+        setLoaingOffers(true);
 
         fetchSearchJobs(search)
         .then((res) => setOffers(res.items))
         .catch((error) => {
-            console.log(`Se ha producido un error en cargar la lista de trabajo: ${error}`);
-            toast.error('Se ha producido un error en cargar la lista de trabajo');
+            console.log(`error Load list job: ${error}`);
+            toast.error(i18n.errorMessages.errorLoadJobs);
         })
-        .finally(() => setLoadingOffers(false));
+        .finally(() => setLoaingOffers(false));
 
     }, [search, setOffers]);
 
     return {
         setSearch,
         offers,
-        loadingOffers,
     }
 }

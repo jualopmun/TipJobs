@@ -1,6 +1,8 @@
+import { useContext } from "react";
 import transformDate from "../../util/tranformDate.util";
 import { ListDescriptionOfferComponent } from "./ListDescriptionOffer";
 import { HeaderContentOfferType } from "./headerContentType";
+import { GlobalContext } from "../../context";
 
 export function HeaderContentOfferComponent({descriptionOffer}: HeaderContentOfferType) {
     const {
@@ -9,6 +11,8 @@ export function HeaderContentOfferComponent({descriptionOffer}: HeaderContentOff
         title, 
         link,
     } = descriptionOffer;
+
+    const { i18n } = useContext(GlobalContext);
     
     const transformDatePublished = transformDate(new Date(creationDate));
 
@@ -33,15 +37,15 @@ export function HeaderContentOfferComponent({descriptionOffer}: HeaderContentOff
                         </div>
                         <div>
                             <button
-                                className="bg-accent hover:bg-blue-500 focus:bg-blue-500
-                                text-white text-lg font-semibold px-4 py-3 mx-5 my-5" 
+                                className="bg-accent text-white text-lg 
+                                font-semibold px-4 py-3 mx-5 my-5" 
                                 name='linkOffer'
                                 onClick={() => window.open(
                                     link,
                                     '_blank'
                                 )}
                             >
-                                INSCRIBIRME EN ESTA OFERTA
+                                {i18n.headerContentOffer.buttonOffer}
                             </button>
                         </div>
                     </div>

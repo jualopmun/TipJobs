@@ -2,12 +2,9 @@ import { memo, useContext } from "react"
 import { GlobalContext } from "../../context";
 import { CardContentComponent } from "../CardContent/CardContent";
 import { OfferComponent } from "./Offer";
-import { useSearchJobs } from "../../hooks";
 
 export const ListOffersComponent = memo(function ListOffersComponent() {
-    const {offers, i18n} = useContext(GlobalContext);
-
-    const {loadingOffers} = useSearchJobs();
+    const {offers, i18n, loadingOffers} = useContext(GlobalContext);
 
     const renderListOffers = offers.map((offer) => (
         <OfferComponent key={offer.id} offer={offer}/>
